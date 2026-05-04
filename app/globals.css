@@ -1,26 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces */
+  --black:         #0A0A0A;
+  --surface:       #121212;
+  --surface-2:     #1A1A1A;
+  --surface-3:     #222222;
+
+  /* Fire spectrum */
+  --red-deep:      #7F1D1D;
+  --red:           #CC1A1A;
+  --red-bright:    #E52222;
+  --orange:        #E85D00;
+  --orange-fire:   #FF7A00;
+  --amber:         #FFAA00;
+  --yellow-fire:   #FFCC00;
+
+  /* Chrome / Metallic */
+  --chrome-dark:   #555555;
+  --chrome:        #8A8A8A;
+  --chrome-mid:    #AAAAAA;
+  --chrome-light:  #CCCCCC;
+  --silver:        #E0E0E0;
+
+  /* Gold */
+  --gold:          #D4A843;
+  --gold-light:    #E8C96A;
+  --gold-dark:     #A07D2F;
+
+  /* UI */
+  --white:         #FFFFFF;
+  --success:       #22C55E;
+  --danger:        #EF4444;
+  --info:          #3B82F6;
+  --text-muted:    #888888;
+  --text-dim:      #555555;
+
+  /* Fonts */
+  --font-display:  'Orbitron', sans-serif;
+  --font-body:     'Inter', sans-serif;
+  --font-mono:     'Share Tech Mono', monospace;
+  --font-accent:   'Rajdhani', sans-serif;
+
+  /* Gradients */
+  --grad-fire:     linear-gradient(90deg, var(--red), var(--orange-fire), var(--amber));
+  --grad-fire-v:   linear-gradient(180deg, var(--yellow-fire), var(--orange-fire), var(--red), transparent);
+  --grad-dark:     linear-gradient(180deg, var(--black) 0%, var(--surface) 100%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    box-sizing: border-box;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--silver);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--orange-fire); border-radius: 3px; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-fire {
+    background: var(--grad-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-fire {
+    filter: drop-shadow(0 0 12px rgba(255, 122, 0, 0.5));
+  }
 }
