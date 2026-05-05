@@ -1,9 +1,8 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Environment, Stars, Float, Sparkles } from "@react-three/drei";
+import { Environment, Stars, Sparkles } from "@react-three/drei";
 import { FireParticles } from "./FireParticles";
-import { SpinningDie } from "./SpinningDie";
 import { Suspense } from "react";
 
 function SceneContent() {
@@ -26,28 +25,6 @@ function SceneContent() {
       />
 
       <FireParticles />
-
-      {/* Left die — pushed out and down */}
-      <Float speed={1.2} floatIntensity={0.5}>
-        <SpinningDie
-          position={[-5.5, -1.2, -1.5]}
-          scale={1.3}
-          speedX={0.3}
-          speedY={0.45}
-          glowColor="#CC1A1A"
-        />
-      </Float>
-
-      {/* Right die — pushed out and down */}
-      <Float speed={0.9} floatIntensity={0.5}>
-        <SpinningDie
-          position={[5.5, -1.5, -1.8]}
-          scale={1.2}
-          speedX={0.4}
-          speedY={0.55}
-          glowColor="#FF7A00"
-        />
-      </Float>
 
       <Environment preset="night" />
     </>
