@@ -14,15 +14,15 @@ function SceneContent() {
       <pointLight position={[-7, 2, -3]} intensity={3.5} color="#CC1A1A" distance={16} />
       <pointLight position={[0, -5, 0]} intensity={5} color="#E85D00" distance={12} />
 
-      <Stars radius={100} depth={60} count={3500} factor={3} fade speed={0.4} />
+      <Stars radius={100} depth={60} count={2000} factor={1.2} fade speed={0.3} />
 
       <Sparkles
-        count={100}
+        count={55}
         scale={[16, 10, 8]}
-        size={1.4}
-        speed={0.3}
-        opacity={0.55}
-        color="#FF7A00"
+        size={0.7}
+        speed={0.2}
+        opacity={0.22}
+        color="#FF9500"
       />
 
       <FireParticles />

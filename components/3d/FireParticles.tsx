@@ -4,7 +4,7 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COUNT = 1200;
+const COUNT = 350;
 
 export function FireParticles() {
   const mesh = useRef<THREE.Points>(null);
@@ -25,9 +25,9 @@ export function FireParticles() {
 
     for (let i = 0; i < COUNT; i++) {
       const i3 = i * 3;
-      positions[i3]     = (Math.random() - 0.5) * 14;
+      positions[i3]     = (Math.random() - 0.5) * 6;
       positions[i3 + 1] = Math.random() * -8 - 2;
-      positions[i3 + 2] = (Math.random() - 0.5) * 8;
+      positions[i3 + 2] = (Math.random() - 0.5) * 4;
       velocities[i3]     = (Math.random() - 0.5) * 0.025;
       velocities[i3 + 1] = Math.random() * 0.06 + 0.02;
       velocities[i3 + 2] = (Math.random() - 0.5) * 0.015;
@@ -58,9 +58,9 @@ export function FireParticles() {
       pos[i3 + 2] += velocities[i3 + 2];
 
       if (lifetimes[i] > 1 || pos[i3 + 1] > 7) {
-        pos[i3]     = (Math.random() - 0.5) * 14;
+        pos[i3]     = (Math.random() - 0.5) * 6;
         pos[i3 + 1] = -4;
-        pos[i3 + 2] = (Math.random() - 0.5) * 8;
+        pos[i3 + 2] = (Math.random() - 0.5) * 4;
         lifetimes[i] = 0;
       }
     }
@@ -70,10 +70,10 @@ export function FireParticles() {
   return (
     <points ref={mesh} geometry={geometry}>
       <pointsMaterial
-        size={0.1}
+        size={0.07}
         vertexColors
         transparent
-        opacity={0.85}
+        opacity={0.5}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}
