@@ -35,7 +35,7 @@ export function AdminLogin() {
         style={{ border: "1px solid rgba(255,122,0,0.2)", background: "rgba(20,20,20,0.95)" }}
       >
         <div className="flex justify-center mb-6">
-          <Image src="/logo-clean.png" alt="Bet Fuego" width={120} height={60} className="object-contain" style={{ filter: "drop-shadow(0 0 8px rgba(255,100,0,0.6))" }} />
+          <Image src="/logo-clean.png" alt="Bet Fuego" width={100} height={100} className="object-contain" style={{ filter: "drop-shadow(0 0 8px rgba(255,100,0,0.6))" }} />
         </div>
         <h1 className="text-center text-white text-xl font-bold mb-1" style={{ letterSpacing: "2px" }}>
           CRM ADMIN

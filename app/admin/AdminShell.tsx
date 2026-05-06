@@ -30,7 +30,7 @@ export function AdminShell({ active, children }: { active: string; children: Rea
         style={{ background: "rgba(15,15,15,0.98)", borderRight: "1px solid rgba(255,122,0,0.1)" }}
       >
         <div className="p-4 flex items-center gap-3" style={{ borderBottom: "1px solid rgba(255,122,0,0.1)" }}>
-          <Image src="/logo-clean.png" alt="BetFuego" width={80} height={40} className="object-contain" style={{ filter: "drop-shadow(0 0 6px rgba(255,100,0,0.5))" }} />
+          <Image src="/logo-clean.png" alt="BetFuego" width={48} height={48} className="object-contain" style={{ filter: "drop-shadow(0 0 6px rgba(255,100,0,0.5))" }} />
         </div>
         <div className="px-2 py-1 mt-1 text-[10px] text-[#444] uppercase" style={{ letterSpacing: "2px", paddingLeft: "1rem" }}>
           CRM Admin
