@@ -27,10 +27,10 @@ export function Navbar() {
           <Image
             src="/logo-text.png"
             alt="Bet Fuego"
-            width={180}
-            height={46}
+            width={200}
+            height={68}
             className="object-contain"
-            style={{ filter: "drop-shadow(0 0 10px rgba(255,80,0,0.6))" }}
+            style={{ filter: "drop-shadow(0 0 12px rgba(255,60,0,0.65))" }}
             priority
           />
         </Link>

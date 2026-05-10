@@ -14,32 +14,30 @@ export function Hero() {
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
 
       <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
         @keyframes tagFade {
           from { opacity: 0; letter-spacing: 8px; }
           to   { opacity: 1; letter-spacing: 5px; }
         }
-        .hero-tagline { animation: tagFade 1s ease-out 1.6s both; }
-
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
 
         @keyframes logoIn {
-          0%   { opacity: 0; transform: translateY(32px) scale(0.92); filter: blur(6px); }
-          60%  { filter: blur(0); }
-          80%  { transform: translateY(-6px) scale(1.02); }
-          100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-        .hero-logo {
-          animation: logoIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both;
-          filter: drop-shadow(0 0 48px rgba(255,90,0,0.55)) drop-shadow(0 0 100px rgba(200,20,0,0.28));
+          0%   { opacity: 0; transform: scale(0.88) translateY(24px); filter: blur(8px); }
+          65%  { filter: blur(0); }
+          82%  { transform: scale(1.03) translateY(-4px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
         @keyframes logoPulse {
-          0%, 100% { filter: drop-shadow(0 0 48px rgba(255,90,0,0.55)) drop-shadow(0 0 100px rgba(200,20,0,0.28)); }
-          50%       { filter: drop-shadow(0 0 64px rgba(255,120,0,0.75)) drop-shadow(0 0 130px rgba(220,40,0,0.40)); }
+          0%, 100% { filter: drop-shadow(0 0 60px rgba(255,80,0,0.6)) drop-shadow(0 0 120px rgba(180,20,0,0.3)); }
+          50%       { filter: drop-shadow(0 0 80px rgba(255,120,0,0.85)) drop-shadow(0 0 160px rgba(220,40,0,0.45)); }
         }
-        .hero-logo { animation: logoIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both, logoPulse 3s ease-in-out 2s infinite; }
+        .hero-logo {
+          animation:
+            logoIn    1s cubic-bezier(0.22,1,0.36,1) 0.3s both,
+            logoPulse 3.5s ease-in-out 2s infinite;
+        }
       `}</style>
 
       {/* 3D background */}
@@ -61,51 +59,33 @@ export function Hero() {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-20 w-full flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
+      <div className="relative z-20 w-full flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 mb-10 px-4 py-1.5 rounded-full border border-[#FF7A00]/30 bg-[#FF7A00]/10 backdrop-blur-sm"
-          style={{ animation: "tagFade 0.8s ease-out 0.2s both" }}
-        >
-          <span className="w-2 h-2 rounded-full bg-[#FF7A00] animate-pulse flex-shrink-0" />
-          <span style={{ fontFamily: "var(--font-mono)", letterSpacing: "3px" }} className="text-xs text-[#FF7A00] uppercase">
-            Próximamente · Argentina
-          </span>
-        </div>
-
-        {/* ── Full Logo — poker chip centered ── */}
-        <div className="mb-2 flex justify-center">
+        {/* ── Full Logo — poker chip, hero centrepiece ── */}
+        <div className="flex justify-center mb-0">
           <Image
             src="/logo-clean.png"
             alt="Bet Fuego"
-            width={460}
-            height={460}
-            className="hero-logo object-contain w-[280px] sm:w-[360px] md:w-[460px]"
+            width={560}
+            height={560}
+            className="hero-logo object-contain"
+            style={{ width: "min(82vw, 520px)", height: "auto" }}
             priority
           />
         </div>
 
-        {/* Tagline */}
-        <p
-          className="hero-tagline text-sm mb-8"
-          style={{ fontFamily: "var(--font-body)", fontStyle: "italic", letterSpacing: "5px", color: "var(--gold)" }}
-        >
-          Ignite Your Game
-        </p>
-
         {/* Description */}
         <p
-          className="text-[#777777] text-sm md:text-base mb-8 max-w-sm leading-relaxed"
-          style={{ animation: "fadeUp 0.9s ease-out 2.2s both" }}
+          className="text-[#777777] text-sm md:text-base mb-6 max-w-xs leading-relaxed"
+          style={{ animation: "fadeUp 0.9s ease-out 1.8s both" }}
         >
           Casino online y apuestas deportivas. Más de 2,000 juegos y los mejores bonos de Argentina.
         </p>
 
         {/* CTAs */}
         <div
-          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center"
-          style={{ animation: "fadeUp 0.9s ease-out 2.4s both" }}
+          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center mb-8"
+          style={{ animation: "fadeUp 0.9s ease-out 2.1s both" }}
         >
           <Link
             href="#registro"
@@ -135,8 +115,8 @@ export function Hero() {
 
         {/* Stats */}
         <div
-          className="mt-8 flex justify-center gap-8 md:gap-14"
-          style={{ animation: "tagFade 1s ease-out 2.6s both" }}
+          className="flex justify-center gap-8 md:gap-14"
+          style={{ animation: "fadeUp 1s ease-out 2.4s both" }}
         >
           {[
             { value: "2,000+", label: "Juegos" },
