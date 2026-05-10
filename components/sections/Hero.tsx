@@ -29,14 +29,8 @@ export function Hero() {
           82%  { transform: scale(1.03) translateY(-4px); }
           100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
-        @keyframes logoPulse {
-          0%, 100% { filter: drop-shadow(0 0 60px rgba(255,80,0,0.6)) drop-shadow(0 0 120px rgba(180,20,0,0.3)); }
-          50%       { filter: drop-shadow(0 0 80px rgba(255,120,0,0.85)) drop-shadow(0 0 160px rgba(220,40,0,0.45)); }
-        }
         .hero-logo {
-          animation:
-            logoIn    1s cubic-bezier(0.22,1,0.36,1) 0.3s both,
-            logoPulse 3.5s ease-in-out 2s infinite;
+          animation: logoIn 1s cubic-bezier(0.22,1,0.36,1) 0.3s both;
         }
       `}</style>
 
@@ -66,10 +60,10 @@ export function Hero() {
           <Image
             src="/logo-clean.png"
             alt="Bet Fuego"
-            width={560}
-            height={560}
+            width={400}
+            height={400}
             className="hero-logo object-contain"
-            style={{ width: "min(82vw, 520px)", height: "auto" }}
+            style={{ width: "min(65vw, 380px)", height: "auto" }}
             priority
           />
         </div>
