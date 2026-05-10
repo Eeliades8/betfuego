@@ -22,15 +22,27 @@ export function Navbar() {
         borderBottom: scrolled ? "1px solid rgba(255,122,0,0.15)" : "1px solid transparent",
       }}
     >
-      {/* 3-col: nav | centered logo | buttons */}
+      {/* 3-col: logo | centered nav | buttons */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 grid grid-cols-3 items-center">
 
-        {/* Left — nav links */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Left — lettering logo */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-text.png"
+            alt="Bet Fuego"
+            width={240}
+            height={81}
+            className="object-contain w-[140px] md:w-[220px]"
+            priority
+          />
+        </Link>
+
+        {/* Center — nav links */}
+        <div className="hidden md:flex items-center justify-center gap-8">
           {[
-            { label: "Casino",    href: "#juegos"   },
-            { label: "Deportes",  href: "#deportes" },
-            { label: "Bonos",     href: "#bonos"    },
+            { label: "Casino",   href: "#juegos"   },
+            { label: "Deportes", href: "#deportes" },
+            { label: "Bonos",    href: "#bonos"    },
           ].map((link) => (
             <a
               key={link.label}
@@ -43,18 +55,6 @@ export function Navbar() {
           ))}
         </div>
         <div className="md:hidden" />
-
-        {/* Center — lettering logo */}
-        <Link href="/" className="flex justify-center items-center">
-          <Image
-            src="/logo-text.png"
-            alt="Bet Fuego"
-            width={240}
-            height={81}
-            className="object-contain w-[160px] md:w-[240px]"
-            priority
-          />
-        </Link>
 
         {/* Right — buttons */}
         <div className="flex items-center justify-end gap-3">

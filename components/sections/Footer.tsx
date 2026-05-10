@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Footer() {
   return (
     <footer className="relative border-t py-16 px-4 md:px-8" style={{ borderColor: "rgba(255,122,0,0.1)", background: "var(--surface)" }}>
@@ -5,19 +7,13 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3
-              style={{ fontFamily: "var(--font-display)", letterSpacing: "4px" }}
-              className="text-2xl font-black mb-2"
-            >
-              <span className="text-[#E0E0E0]" translate="no">BET</span>{" "}
-              <span className="text-fire" translate="no">FUEGO</span>
-            </h3>
-            <p
-              style={{ fontStyle: "italic", color: "var(--gold)", letterSpacing: "3px" }}
-              className="text-sm mb-4"
-            >
-              Ignite Your Game
-            </p>
+            <Image
+              src="/logo-text.png"
+              alt="Bet Fuego"
+              width={180}
+              height={61}
+              className="object-contain mb-2"
+            />
             <p className="text-[#555555] text-sm leading-relaxed max-w-xs">
               Plataforma de casino online y apuestas deportivas autorizada para operar en la República Argentina.
             </p>

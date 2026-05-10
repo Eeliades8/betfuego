@@ -2,13 +2,12 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeroScene = dynamic(
   () => import("@/components/3d/HeroScene").then((m) => m.HeroScene),
   { ssr: false }
 );
-
-const BET_LETTERS = ["B", "E", "T"];
 
 export function Hero() {
   return (
@@ -125,35 +124,16 @@ export function Hero() {
           </span>
         </div>
 
-        {/* ── Animated Brand Name ── */}
-        <div className="mb-3" style={{ perspective: "600px" }}>
-
-          {/* BET — letter-by-letter drop */}
-          <div
-            className="bet-wrap"
-            style={{ fontFamily: "var(--font-display)", letterSpacing: "14px", lineHeight: 1 }}
-          >
-            {BET_LETTERS.map((l, i) => (
-              <span
-                key={l}
-                className="bet-letter text-[#D0D0D0] text-4xl sm:text-5xl md:text-6xl font-black"
-                style={{ animationDelay: `${0.3 + i * 0.09}s` }}
-              >
-                {l}
-              </span>
-            ))}
-          </div>
-
-          {/* FUEGO — single block, enters as one then fire-shimmers */}
-          <span
-            className="fuego-word font-black text-6xl sm:text-7xl md:text-8xl"
-            style={{ fontFamily: "var(--font-display)", letterSpacing: "6px", lineHeight: 1.05 }}
-          >
-            FUEGO
-          </span>
-
-          {/* Animated underline */}
-          <span className="hero-line mt-2 mx-auto" style={{ maxWidth: "420px" }} />
+        {/* ── Full logo centrepiece ── */}
+        <div className="mb-4 flex justify-center">
+          <Image
+            src="/logo-clean.png"
+            alt="Bet Fuego"
+            width={420}
+            height={420}
+            className="object-contain w-[260px] sm:w-[340px] md:w-[420px]"
+            priority
+          />
         </div>
 
         {/* Tagline */}

@@ -45,9 +45,13 @@ export function CTASection() {
 
         {/* Logo above CTA */}
         <div className="flex justify-center mb-4">
-          <div style={{ position: "relative", width: 320, height: 320 }}>
-            <Image src="/logo-clean.png" alt="Bet Fuego" fill className="object-contain" sizes="320px" style={{ filter: "drop-shadow(0 0 22px rgba(255,100,0,0.9))" }} />
-          </div>
+          <Image
+            src="/logo-clean.png"
+            alt="Bet Fuego"
+            width={420}
+            height={420}
+            className="object-contain w-[260px] sm:w-[340px] md:w-[420px]"
+          />
         </div>
 
         <div
