@@ -2,35 +2,94 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image";
 
 const HeroScene = dynamic(
   () => import("@/components/3d/HeroScene").then((m) => m.HeroScene),
   { ssr: false }
 );
 
+const BET_LETTERS = ["B", "E", "T"];
+
 export function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
 
       <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
+        /* ── Letter entrance ── */
+        @keyframes letterDrop {
+          0%   { opacity: 0; transform: translateY(-60px) scale(1.3) rotateX(40deg); filter: blur(8px); }
+          60%  { opacity: 1; filter: blur(0); }
+          80%  { transform: translateY(6px) scale(0.97) rotateX(0deg); }
+          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
         }
+        @keyframes letterRise {
+          0%   { opacity: 0; transform: translateY(60px) scale(1.3) rotateX(-40deg); filter: blur(8px); }
+          60%  { opacity: 1; filter: blur(0); }
+          80%  { transform: translateY(-6px) scale(0.97) rotateX(0deg); }
+          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
+        }
+
+        /* ── Fire shimmer on FUEGO word ── */
+        @keyframes fireShimmer {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        /* ── FUEGO enters + then shimmers ── */
+        @keyframes fuegoIn {
+          0%   { opacity: 0; transform: translateY(60px) scale(1.25) rotateX(-35deg); filter: blur(8px); }
+          55%  { opacity: 1; filter: blur(0); }
+          78%  { transform: translateY(-5px) scale(0.98) rotateX(0deg); }
+          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
+        }
+        .fuego-word {
+          display: block;
+          background: linear-gradient(90deg, #991100, #CC1A1A 15%, #FF5500 30%, #FF9000 45%, #FFCC00 55%, #FF7A00 70%, #CC1A1A 85%, #991100);
+          background-size: 300% 100%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation:
+            fuegoIn      0.8s cubic-bezier(0.22,1,0.36,1) 0.6s both,
+            fireShimmer  3s  ease-in-out 2s infinite;
+        }
+
+        /* ── Subtle glow pulse on BET ── */
+        @keyframes silverGlow {
+          0%, 100% { opacity: 0.90; }
+          50%       { opacity: 1; }
+        }
+        /* BET letters */
+        .bet-letter {
+          display: inline-block;
+          animation: letterDrop 0.75s cubic-bezier(0.22,1,0.36,1) both;
+          animation-fill-mode: both;
+        }
+        .bet-wrap { animation: silverGlow 3s ease-in-out 2s infinite; }
+
+        /* ── Underline sweep ── */
+        @keyframes lineSweep {
+          0%   { width: 0; opacity: 0; }
+          60%  { opacity: 1; }
+          100% { width: 100%; opacity: 1; }
+        }
+        .hero-line {
+          display: block;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #CC1A1A, #FF7A00, #FFAA00, #FF7A00, #CC1A1A, transparent);
+          animation: lineSweep 1s ease-out 1.5s both;
+        }
+
+        /* ── Tagline fade ── */
         @keyframes tagFade {
           from { opacity: 0; letter-spacing: 8px; }
           to   { opacity: 1; letter-spacing: 5px; }
         }
-
-        @keyframes logoIn {
-          0%   { opacity: 0; transform: scale(0.88) translateY(24px); filter: blur(8px); }
-          65%  { filter: blur(0); }
-          82%  { transform: scale(1.03) translateY(-4px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        }
-        .hero-logo {
-          animation: logoIn 1s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+        .hero-tagline { animation: tagFade 1s ease-out 2s both; }
+        /* ── Generic fade for non-tagline elements ── */
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
 
@@ -53,33 +112,70 @@ export function Hero() {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-20 w-full flex flex-col items-center text-center px-4">
+      <div className="relative z-20 w-full flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
 
-        {/* ── Full Logo — poker chip, hero centrepiece ── */}
-        <div className="flex justify-center mb-0">
-          <Image
-            src="/logo-clean.png"
-            alt="Bet Fuego"
-            width={400}
-            height={400}
-            className="hero-logo object-contain"
-            style={{ width: "min(65vw, 380px)", height: "auto" }}
-            priority
-          />
+        {/* Badge */}
+        <div
+          className="inline-flex items-center gap-2 mb-10 px-4 py-1.5 rounded-full border border-[#FF7A00]/30 bg-[#FF7A00]/10 backdrop-blur-sm"
+          style={{ animation: "tagFade 0.8s ease-out 0.2s both" }}
+        >
+          <span className="w-2 h-2 rounded-full bg-[#FF7A00] animate-pulse flex-shrink-0" />
+          <span style={{ fontFamily: "var(--font-mono)", letterSpacing: "3px" }} className="text-xs text-[#FF7A00] uppercase">
+            Próximamente · Argentina
+          </span>
         </div>
+
+        {/* ── Animated Brand Name ── */}
+        <div className="mb-3" style={{ perspective: "600px" }}>
+
+          {/* BET — letter-by-letter drop */}
+          <div
+            className="bet-wrap"
+            style={{ fontFamily: "var(--font-display)", letterSpacing: "14px", lineHeight: 1 }}
+          >
+            {BET_LETTERS.map((l, i) => (
+              <span
+                key={l}
+                className="bet-letter text-[#D0D0D0] text-4xl sm:text-5xl md:text-6xl font-black"
+                style={{ animationDelay: `${0.3 + i * 0.09}s` }}
+              >
+                {l}
+              </span>
+            ))}
+          </div>
+
+          {/* FUEGO — single block, enters as one then fire-shimmers */}
+          <span
+            className="fuego-word font-black text-6xl sm:text-7xl md:text-8xl"
+            style={{ fontFamily: "var(--font-display)", letterSpacing: "6px", lineHeight: 1.05 }}
+          >
+            FUEGO
+          </span>
+
+          {/* Animated underline */}
+          <span className="hero-line mt-2 mx-auto" style={{ maxWidth: "420px" }} />
+        </div>
+
+        {/* Tagline */}
+        <p
+          className="hero-tagline text-sm mb-8"
+          style={{ fontFamily: "var(--font-body)", fontStyle: "italic", letterSpacing: "5px", color: "var(--gold)" }}
+        >
+          Ignite Your Game
+        </p>
 
         {/* Description */}
         <p
-          className="text-[#777777] text-sm md:text-base mb-6 max-w-xs leading-relaxed"
-          style={{ animation: "fadeUp 0.9s ease-out 1.8s both" }}
+          className="text-[#777777] text-sm md:text-base mb-8 max-w-sm leading-relaxed"
+          style={{ animation: "fadeUp 0.9s ease-out 2.2s both" }}
         >
           Casino online y apuestas deportivas. Más de 2,000 juegos y los mejores bonos de Argentina.
         </p>
 
         {/* CTAs */}
         <div
-          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center mb-8"
-          style={{ animation: "fadeUp 0.9s ease-out 2.1s both" }}
+          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center"
+          style={{ animation: "fadeUp 0.9s ease-out 2.4s both" }}
         >
           <Link
             href="#registro"
@@ -109,8 +205,8 @@ export function Hero() {
 
         {/* Stats */}
         <div
-          className="flex justify-center gap-8 md:gap-14"
-          style={{ animation: "fadeUp 1s ease-out 2.4s both" }}
+          className="mt-8 flex justify-center gap-8 md:gap-14"
+          style={{ animation: "tagFade 1s ease-out 2.6s both" }}
         >
           {[
             { value: "2,000+", label: "Juegos" },
