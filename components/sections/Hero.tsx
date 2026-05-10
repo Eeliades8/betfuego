@@ -2,95 +2,44 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeroScene = dynamic(
   () => import("@/components/3d/HeroScene").then((m) => m.HeroScene),
   { ssr: false }
 );
 
-const BET_LETTERS = ["B", "E", "T"];
-
 export function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
 
       <style>{`
-        /* ── Letter entrance ── */
-        @keyframes letterDrop {
-          0%   { opacity: 0; transform: translateY(-60px) scale(1.3) rotateX(40deg); filter: blur(8px); }
-          60%  { opacity: 1; filter: blur(0); }
-          80%  { transform: translateY(6px) scale(0.97) rotateX(0deg); }
-          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
-        }
-        @keyframes letterRise {
-          0%   { opacity: 0; transform: translateY(60px) scale(1.3) rotateX(-40deg); filter: blur(8px); }
-          60%  { opacity: 1; filter: blur(0); }
-          80%  { transform: translateY(-6px) scale(0.97) rotateX(0deg); }
-          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
-        }
-
-        /* ── Fire shimmer on FUEGO word ── */
-        @keyframes fireShimmer {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        /* ── FUEGO enters + then shimmers ── */
-        @keyframes fuegoIn {
-          0%   { opacity: 0; transform: translateY(60px) scale(1.25) rotateX(-35deg); filter: blur(8px); }
-          55%  { opacity: 1; filter: blur(0); }
-          78%  { transform: translateY(-5px) scale(0.98) rotateX(0deg); }
-          100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
-        }
-        .fuego-word {
-          display: block;
-          background: linear-gradient(90deg, #991100, #CC1A1A 15%, #FF5500 30%, #FF9000 45%, #FFCC00 55%, #FF7A00 70%, #CC1A1A 85%, #991100);
-          background-size: 300% 100%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation:
-            fuegoIn      0.8s cubic-bezier(0.22,1,0.36,1) 0.6s both,
-            fireShimmer  3s  ease-in-out 2s infinite;
-        }
-
-        /* ── Subtle glow pulse on BET ── */
-        @keyframes silverGlow {
-          0%, 100% { opacity: 0.90; }
-          50%       { opacity: 1; }
-        }
-        /* BET letters */
-        .bet-letter {
-          display: inline-block;
-          animation: letterDrop 0.75s cubic-bezier(0.22,1,0.36,1) both;
-          animation-fill-mode: both;
-        }
-        .bet-wrap { animation: silverGlow 3s ease-in-out 2s infinite; }
-
-        /* ── Underline sweep ── */
-        @keyframes lineSweep {
-          0%   { width: 0; opacity: 0; }
-          60%  { opacity: 1; }
-          100% { width: 100%; opacity: 1; }
-        }
-        .hero-line {
-          display: block;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #CC1A1A, #FF7A00, #FFAA00, #FF7A00, #CC1A1A, transparent);
-          animation: lineSweep 1s ease-out 1.5s both;
-        }
-
-        /* ── Tagline fade ── */
         @keyframes tagFade {
           from { opacity: 0; letter-spacing: 8px; }
           to   { opacity: 1; letter-spacing: 5px; }
         }
-        .hero-tagline { animation: tagFade 1s ease-out 2s both; }
-        /* ── Generic fade for non-tagline elements ── */
+        .hero-tagline { animation: tagFade 1s ease-out 1.6s both; }
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(16px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes logoIn {
+          0%   { opacity: 0; transform: translateY(32px) scale(0.92); filter: blur(6px); }
+          60%  { filter: blur(0); }
+          80%  { transform: translateY(-6px) scale(1.02); }
+          100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .hero-logo {
+          animation: logoIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+          filter: drop-shadow(0 0 48px rgba(255,90,0,0.55)) drop-shadow(0 0 100px rgba(200,20,0,0.28));
+        }
+        @keyframes logoPulse {
+          0%, 100% { filter: drop-shadow(0 0 48px rgba(255,90,0,0.55)) drop-shadow(0 0 100px rgba(200,20,0,0.28)); }
+          50%       { filter: drop-shadow(0 0 64px rgba(255,120,0,0.75)) drop-shadow(0 0 130px rgba(220,40,0,0.40)); }
+        }
+        .hero-logo { animation: logoIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.4s both, logoPulse 3s ease-in-out 2s infinite; }
       `}</style>
 
       {/* 3D background */}
@@ -125,35 +74,16 @@ export function Hero() {
           </span>
         </div>
 
-        {/* ── Animated Brand Name ── */}
-        <div className="mb-3" style={{ perspective: "600px" }}>
-
-          {/* BET — letter-by-letter drop */}
-          <div
-            className="bet-wrap"
-            style={{ fontFamily: "var(--font-display)", letterSpacing: "14px", lineHeight: 1 }}
-          >
-            {BET_LETTERS.map((l, i) => (
-              <span
-                key={l}
-                className="bet-letter text-[#D0D0D0] text-4xl sm:text-5xl md:text-6xl font-black"
-                style={{ animationDelay: `${0.3 + i * 0.09}s` }}
-              >
-                {l}
-              </span>
-            ))}
-          </div>
-
-          {/* FUEGO — single block, enters as one then fire-shimmers */}
-          <span
-            className="fuego-word font-black text-6xl sm:text-7xl md:text-8xl"
-            style={{ fontFamily: "var(--font-display)", letterSpacing: "6px", lineHeight: 1.05 }}
-          >
-            FUEGO
-          </span>
-
-          {/* Animated underline */}
-          <span className="hero-line mt-2 mx-auto" style={{ maxWidth: "420px" }} />
+        {/* ── Full Logo — poker chip centered ── */}
+        <div className="mb-2 flex justify-center">
+          <Image
+            src="/logo-clean.png"
+            alt="Bet Fuego"
+            width={460}
+            height={460}
+            className="hero-logo object-contain w-[280px] sm:w-[360px] md:w-[460px]"
+            priority
+          />
         </div>
 
         {/* Tagline */}

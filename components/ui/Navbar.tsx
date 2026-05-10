@@ -25,12 +25,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo-clean.png"
+            src="/logo-text.png"
             alt="Bet Fuego"
-            width={56}
-            height={56}
+            width={180}
+            height={46}
             className="object-contain"
-            style={{ filter: "drop-shadow(0 0 10px rgba(255,80,0,0.7))" }}
+            style={{ filter: "drop-shadow(0 0 10px rgba(255,80,0,0.6))" }}
             priority
           />
         </Link>
