@@ -22,24 +22,15 @@ export function Navbar() {
         borderBottom: scrolled ? "1px solid rgba(255,122,0,0.15)" : "1px solid transparent",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo-clean.png"
-            alt="Bet Fuego"
-            width={140}
-            height={70}
-            className="object-contain"
-            style={{ filter: "drop-shadow(0 0 8px rgba(255,100,0,0.6))" }}
-            priority
-          />
-        </Link>
+      {/* 3-col: nav | centered logo | buttons */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 grid grid-cols-3 items-center">
 
+        {/* Left — nav links */}
         <div className="hidden md:flex items-center gap-8">
           {[
-            { label: "Casino", href: "#juegos" },
-            { label: "Deportes", href: "#deportes" },
-            { label: "Bonos", href: "#bonos" },
+            { label: "Casino",    href: "#juegos"   },
+            { label: "Deportes",  href: "#deportes" },
+            { label: "Bonos",     href: "#bonos"    },
           ].map((link) => (
             <a
               key={link.label}
@@ -51,8 +42,22 @@ export function Navbar() {
             </a>
           ))}
         </div>
+        <div className="md:hidden" />
 
-        <div className="flex items-center gap-3">
+        {/* Center — lettering logo */}
+        <Link href="/" className="flex justify-center items-center">
+          <Image
+            src="/logo-text.png"
+            alt="Bet Fuego"
+            width={240}
+            height={81}
+            className="object-contain w-[160px] md:w-[240px]"
+            priority
+          />
+        </Link>
+
+        {/* Right — buttons */}
+        <div className="flex items-center justify-end gap-3">
           <a
             href="#registro"
             className="hidden md:block px-4 py-2 text-sm font-bold text-[#888888] hover:text-[#E0E0E0] transition-colors"
